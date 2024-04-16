@@ -34,8 +34,8 @@ class AdminServiceProvider extends ServiceProvider
         // App::setFallbackLocale(config('admin.locale'));
 
         // $this->loadRoutesFrom(__DIR__.'/../routes/web.php','admin');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views/admin', 'admin');
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'admin');
+        $this->loadViewsFrom(__DIR__.'/../resources/views/admin', 'admin');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'admin');
         // $this->loadMigrationsFrom(__DIR__ .'/database/migrations');
 
         // $router = $this->app->make(Router::class);

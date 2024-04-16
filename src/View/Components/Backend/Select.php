@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Backend;
+namespace Cpkm\Admin\View\Components\Backend;
 
 use Illuminate\View\Component;
 
@@ -17,12 +17,14 @@ class Select extends Component
     public $multiple;
     public $children;
     public $ajax;
+
+    public $source;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($text,$placeholder,$name,$options = [],$children = [],$multiple=false,$value = '',$required = false,$disabled = false, $ajax = '', $readonly = false)
+    public function __construct($text,$placeholder,$name,$options = [],$children = [],$multiple=false,$value = '',$required = false,$disabled = false, $ajax = '', $readonly = false, $source = '')
     {
         $this->name = $name;
         $this->value= $value;
@@ -35,6 +37,10 @@ class Select extends Component
         $this->children = $children;
         $this->ajax = $ajax;
         $this->readonly = $readonly;
+        if($source) {
+            $service = app($source);
+            $this->options = $service->select();
+        }
     }
 
     /**

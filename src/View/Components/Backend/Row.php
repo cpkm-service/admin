@@ -1,6 +1,6 @@
 <?php
 
-namespace Oukuyun\Admin\View\Components\Backend;
+namespace Cpkm\Admin\View\Components\Backend;
 
 use Illuminate\View\Component;
 

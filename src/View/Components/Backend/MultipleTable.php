@@ -4,7 +4,7 @@ namespace Cpkm\Admin\View\Components\Backend;
 
 use Illuminate\View\Component;
 
-class Multiple extends Component
+class MultipleTable extends Component
 {
     public $parameters;
     public $text;
@@ -34,6 +34,6 @@ class Multiple extends Component
      */
     public function render()
     {
-        return view("admin::components.backend.multiple");
+        return view("admin::components.backend.multiple_table");
     }
 }
