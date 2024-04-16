@@ -11,7 +11,7 @@
         "repositories": {
             "cpkm/admin": {
                 "type": "vcs",
-                "url": "git@github.com:cpkm-service/unite_model.git"
+                "url": "git@github.com:cpkm-service/admin.git"
             }
         }
     ```
