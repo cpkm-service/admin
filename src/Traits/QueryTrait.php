@@ -17,7 +17,9 @@ trait QueryTrait
             $query = $query->with($this->withs);
         }
         if(isset($this->detail) && $this->detail) {
-            $query = $query->select($this->detail);
+            $query = $query->select(collect($this->detail)->map(function($item){
+                return $this->getTable().'.'.$item;
+            })->toArray());
         }
         return $query;
     }
