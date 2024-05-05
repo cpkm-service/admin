@@ -122,6 +122,7 @@
                         :placeholder="$fields[$item['field']]['placeholder']"
                         :required="$fields[$item['field']]['required']??false"
                         :disabled="($fields[$item['field']]['disabled']??false)"
+                        :float="($fields[$item['field']]['float']??false)"
                         :value="(old($item['field'])??($fields[$item['field']]['value']??''))" />
                     @break
                     @case('media')

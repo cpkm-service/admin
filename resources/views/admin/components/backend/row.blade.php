@@ -5,8 +5,22 @@
             @foreach($item['col'] as $sub_item)
                 @if($sub_item['class'] == 'row')
                     <x-backend::row :row="$sub_item" />
+                @elseif($sub_item['class'] == 'slots')
+                    @yield($sub_item['field'])
                 @elseif($sub_item['class'] == 'fields')
                     @switch($fields[$sub_item['field']]['tag'])
+                        @case('radio')
+                        <x-backend::radio
+                            :direction="$fields[$sub_item['field']]['tag']"
+                            :tag="$fields[$sub_item['field']]['tag']" 
+                            :text="$fields[$sub_item['field']]['text']" 
+                            :name="$fields[$sub_item['field']]['name']" 
+                            :options="$fields[$sub_item['field']]['options']" 
+                            :placeholder="$fields[$sub_item['field']]['placeholder']"
+                            :required="($fields[$sub_item['field']]['required']??false)"
+                            :disabled="($fields[$sub_item['field']]['disabled']??false)"
+                            :value="($fields[$sub_item['field']]['value']??'')" />
+                        @break
                         @case('select')
                         <x-backend::select 
                             :children="($fields[$sub_item['field']]['children']??[])" 
@@ -47,6 +61,7 @@
                             :placeholder="$fields[$sub_item['field']]['placeholder']"
                             :required="$fields[$sub_item['field']]['required']??false"
                             :disabled="($fields[$sub_item['field']]['disabled']??false)"
+                            :float="($fields[$sub_item['field']]['float']??false)"
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
                         @break
                         @case('checkbox')

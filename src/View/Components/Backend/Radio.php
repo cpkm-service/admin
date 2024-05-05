@@ -34,6 +34,6 @@ class Radio extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.backend.radio');
+        return view('admin::components.backend.radio');
     }
 }

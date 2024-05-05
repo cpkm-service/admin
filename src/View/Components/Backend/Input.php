@@ -56,6 +56,6 @@ class Input extends Component
      */
     public function render()
     {
-        return view("components.backend.{$this->tag}-{$this->type}");
+        return view("admin::components.backend.{$this->tag}-{$this->type}");
     }
 }

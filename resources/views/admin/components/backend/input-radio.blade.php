@@ -2,7 +2,7 @@
     <label class="form-label">{{__($text)}}@if($required)<span class="text-danger">*</span>@endif</label>
     <div class="@if($direction == 'horizontal') space-x-2 @else space-y-2 @endif">
         @foreach($options as $key => $option)
-        <div class="form-check @if($direction != 'horizontal') form-check-inline @endif">
+        <div class="form-check @if($direction == 'horizontal') form-check-inline @endif">
             <input 
                 class="form-check-input" 
                 type="radio" 
