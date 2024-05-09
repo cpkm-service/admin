@@ -1,8 +1,10 @@
 <div class="mb-4 multiple_table" id="{{$name}}_multiple_table">
     <label class="form-label" for="{{$name}}">{{__($text)}}@if($required)<span class="text-danger">*</span>@endif</label>
+    @if(!($disabled??false))
     <button type="button" class="ms-2 btn btn-sm btn-danger" id="{{$name}}_template_add">{{__('admin::Admin.insert')}}</button>
+    @endif
     <div class="table-responsive">
-        <table class="table table-bordered table-striped table-vcenter js-dataTable-full mt-2">
+        <table class="table table-bordered table-striped js-dataTable-full mt-2">
             <thead>
                 <tr>
                     <th class="text-center">#</th>
@@ -123,6 +125,7 @@
                         :required="$fields[$item['field']]['required']??false"
                         :disabled="($fields[$item['field']]['disabled']??false)"
                         :float="($fields[$item['field']]['float']??false)"
+                        :int="($fields[$item['field']]['int']??false)"
                         :value="(old($item['field'])??($fields[$item['field']]['value']??''))" />
                     @break
                     @case('media')
@@ -151,7 +154,12 @@
             </td>
             @endforeach
             <td>
-                <button class="btn btn-sm btn-danger delete_multiple_template" type="button">{{__('admin::Admin.delete')}}</button>
+                @if(!($disabled??false))
+                <button class="btn btn-sm btn-danger delete_multiple_template" type="button">
+                    <i class="fa fa-x"></i>
+                    {{-- {{__('admin::Admin.delete')}} --}}
+                </button>
+                @endif
             </td>
         </tr>
     </tbody>
@@ -213,6 +221,11 @@
                         case 'TEXTAREA':
                             element.text(item[key])
                             break;
+                        case 'SELECT':
+                            element.attr('transfer', true);
+                            element.val(item[key]).trigger('change')
+                            element.removeAttr('transfer');
+                            break;
                         default:
                             if(element.prop('type') == 'checkbox') {
                                 if(!item[key]) {
@@ -226,9 +239,8 @@
                                     if(element.attr('type') != 'file') {
                                         element.val(item[key]).trigger('change')
                                     }else{
-                                        if(item[key] && element.attr('disabled')){
-                                            console.log(item[key])
-                                            console.log(element)
+                                        if(item[key]){
+                                            makeImage(element.attr('name'), item[key]);
                                         }
                                     }
                                 }

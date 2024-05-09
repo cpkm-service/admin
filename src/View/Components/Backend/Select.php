@@ -50,6 +50,6 @@ class Select extends Component
      */
     public function render()
     {
-        return view('components.backend.select');
+        return view('admin::components.backend.select');
     }
 }

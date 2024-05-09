@@ -12,12 +12,14 @@ class MultipleTable extends Component
     public $name;
     public $value;
     public $required;
+
+    public $disabled;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($parameters,$text,$name,$key,$value = [],$required = false,)
+    public function __construct($parameters,$text,$name,$key,$value = [],$required = false, $disabled = false)
     {
         $this->parameters = $parameters;
         $this->name = $name;
@@ -25,6 +27,7 @@ class MultipleTable extends Component
         $this->text = $text;
         $this->key = $key;
         $this->required = $required;
+        $this->disabled = $disabled;
     }
 
     /**

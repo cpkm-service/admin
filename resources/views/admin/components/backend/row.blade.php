@@ -62,6 +62,7 @@
                             :required="$fields[$sub_item['field']]['required']??false"
                             :disabled="($fields[$sub_item['field']]['disabled']??false)"
                             :float="($fields[$sub_item['field']]['float']??false)"
+                            :int="($fields[$sub_item['field']]['int']??false)"
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
                         @break
                         @case('checkbox')
@@ -102,6 +103,7 @@
                             :text="$fields[$sub_item['field']]['text']" 
                             :key="$fields[$sub_item['field']]['key']" 
                             :name="$fields[$sub_item['field']]['name']" 
+                            :disabled="$fields[$sub_item['field']]['disabled']??false" 
                             :parameters="$fields[$sub_item['field']]['parameters']"
                             :id="$sub_item['field']"
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
