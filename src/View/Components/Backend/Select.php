@@ -17,6 +17,8 @@ class Select extends Component
     public $multiple;
     public $children;
     public $ajax;
+    public $templateResult;
+    public $templateSelection;
 
     public $source;
     /**
@@ -24,7 +26,7 @@ class Select extends Component
      *
      * @return void
      */
-    public function __construct($text,$placeholder,$name,$options = [],$children = [],$multiple=false,$value = '',$required = false,$disabled = false, $ajax = '', $readonly = false, $source = '')
+    public function __construct($text,$placeholder,$name,$options = [],$children = [],$multiple=false,$value = '',$required = false,$disabled = false, $ajax = '', $readonly = false, $source = '', $templateResult = '', $templateSelection = '')
     {
         $this->name = $name;
         $this->value= $value;
@@ -41,6 +43,8 @@ class Select extends Component
             $service = app($source);
             $this->options = $service->select();
         }
+        $this->templateResult = $templateResult;
+        $this->templateSelection = $templateSelection;
     }
 
     /**

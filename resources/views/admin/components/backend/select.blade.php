@@ -68,9 +68,17 @@
         }
     });
     @else
-    $(`form select[name="{{$name}}"]`).select2({
-        allowClear: true,
-    });
+    $(document).ready(function(){
+        $(`form select[name="{{$name}}"]`).select2({
+            allowClear: true,
+            @if($templateResult)
+            templateResult: {{$templateResult}},
+            @endif
+            @if($templateSelection)
+            templateSelection: {{$templateSelection}},
+            @endif
+        });
+    })
     @endif
     @if($readonly)
     $(`form select[name="{{$name}}"]`).change(function(){
