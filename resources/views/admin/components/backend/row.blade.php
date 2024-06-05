@@ -68,6 +68,13 @@
                             :int="($fields[$sub_item['field']]['int']??false)"
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
                         @break
+                        @case('currency-select')
+                            <x-backend.currency-select 
+                                :name="$fields[$sub_item['field']]['name']" 
+                                :value="($fields[$sub_item['field']]['value']??'')"
+                                :disabled="($fields[$sub_item['field']]['disabled']??false)"
+                            />
+                        @break
                         @case('checkbox')
                         <x-backend::checkbox 
                             :tag="$fields[$sub_item['field']]['tag']" 

@@ -212,7 +212,9 @@
     multiple_data['{{$name}}'] = @json($value);
     
     $('[id="{{$name}}_template_add"]').click(function(){
-        makeItem(($('[id="{{$name}}_area"] .template_area').length + 1), '{{$name}}');
+        let add_length = ($('[id="{{$name}}_area"] .template_area').length + 1);
+        makeItem(add_length, '{{$name}}');
+        $(this).trigger('multiple_table_add', [add_length, '{{$name}}']);
     }); 
     $(document).ready(function(){
         $('[id="{{$name}}_template"] select').each(function(){
