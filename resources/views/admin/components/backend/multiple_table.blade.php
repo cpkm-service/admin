@@ -102,6 +102,9 @@
                         :disabled="($fields[$item['field']]['disabled']??false)"
                         :multiple="($fields[$item['field']]['multiple']??false)"
                         :source="($fields[$item['field']]['source']??'')"
+                        :class="($fields[$item['field']]['class']??'')"
+                        :templateResult="($fields[$item['field']]['templateResult']??'')"
+                        :templateSelection="($fields[$item['field']]['templateSelection']??'')"
                         :value="(old($item['field'])??($fields[$item['field']]['value']??''))" />
                     @break
                     @case('textarea')
@@ -186,9 +189,16 @@
         $(`[id="${name}_area"]`).append($(`[id="${name}_template"] tr`).clone().removeClass(`${name}_template`).prop("outerHTML").replace(/\$i/ig,id));
         $(`[id="${name}_area"] select`).each(function(){
             if(!$(this).data('select2')) {
-                $(this).select2({
+                let select2_option = {
                     allowClear: true,
-                });
+                };
+                if($(this).data('templateresult')) {
+                    select2_option['templateResult'] = eval($(this).data('templateresult'));
+                }
+                if($(this).data('templateselection')) {
+                    select2_option['templateSelection'] = eval($(this).data('templateselection'));
+                }
+                $(this).select2(select2_option);
             }
         });
     }
@@ -203,7 +213,7 @@
     
     $('[id="{{$name}}_template_add"]').click(function(){
         makeItem(($('[id="{{$name}}_area"] .template_area').length + 1), '{{$name}}');
-    });
+    }); 
     $(document).ready(function(){
         $('[id="{{$name}}_template"] select').each(function(){
             if($(this).data('select2')) {

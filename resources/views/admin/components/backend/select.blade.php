@@ -1,12 +1,23 @@
 
-<div class="mb-4">
+<div class="mb-4 {{$class??''}}">
     @if($text)
     <label class="form-label" for="{{$name}}">{{__($text)}}@if($required)<span class="text-danger">*</span>@endif</label>
     @endif
     @if($readonly)
     <input type="hidden" name="{{$name}}" value="{{$value}}">
     @endif
-    <select class="js-select2 form-select" id="{{$name}}" name="{{$name}}" style="width: 100%;" data-placeholder="{{__($placeholder)}}" @if($disabled || $readonly) disabled @endif @if($multiple) multiple @endif @if($required) required @endif lang="zh-CN">
+    <select
+        class="js-select2 form-select"
+        id="{{$name}}" name="{{$name}}"
+        style="width: 100%;"
+        data-placeholder="{{__($placeholder)}}"
+        @if($disabled || $readonly) disabled @endif
+        @if($multiple) multiple @endif
+        @if($required) required @endif
+        @if($templateResult) data-templateResult="{{$templateResult}}" @endif
+        @if($templateSelection) data-templateSelection="{{$templateSelection}}" @endif
+        lang="zh-CN"
+    >
         @if(!$multiple)
         <option></option>
         @endif

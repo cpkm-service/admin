@@ -26,7 +26,7 @@ class Select extends Component
      *
      * @return void
      */
-    public function __construct($text,$placeholder,$name,$options = [],$children = [],$multiple=false,$value = '',$required = false,$disabled = false, $ajax = '', $readonly = false, $source = '', $templateResult = '', $templateSelection = '')
+    public function __construct($text,$placeholder,$name,$options = [],$children = [],$multiple=false,$value = '',$required = false,$disabled = false, $ajax = '', $readonly = false, $source = '', $templateResult = '', $templateSelection = '', public $class='')
     {
         $this->name = $name;
         $this->value= $value;

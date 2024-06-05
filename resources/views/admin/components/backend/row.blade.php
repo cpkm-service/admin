@@ -32,6 +32,9 @@
                             :disabled="($fields[$sub_item['field']]['disabled']??false)"
                             :multiple="($fields[$sub_item['field']]['multiple']??false)"
                             :source="($fields[$sub_item['field']]['source']??'')"
+                            :class="($fields[$sub_item['field']]['class']??'')"
+                            :templateResult="($fields[$sub_item['field']]['templateResult']??'')"
+                            :templateSelection="($fields[$sub_item['field']]['templateSelection']??'')"
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
                         @break
                         @case('textarea')
