@@ -9,7 +9,9 @@
     @enderror
     <div class="row">
         <div class="mb-4">
+            @if(preg_match('/edit|create/', Route::currentRouteName()))
             <button type="submit" class="btn btn-primary">{{__('admin::Admin.sent')}}</button>
+            @endif
             @if($form['back'] !== false)
             <a href="{{$form['back']}}" class="btn btn-secondary">{{__('admin::Admin.back')}}</a>
             @endif
