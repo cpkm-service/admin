@@ -118,6 +118,17 @@
                             :id="$sub_item['field']"
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
                         @break
+                        @case('ckeditor-print')
+                            @if(collect(app()->getLoadedProviders())->has(\Cpkm\Print\PrintServiceProvider::class))
+                            <x-print::ckeditor-print 
+                                :text="$fields[$sub_item['field']]['text']" 
+                                :name="$fields[$sub_item['field']]['name']" 
+                                :placeholder="$fields[$sub_item['field']]['placeholder']"
+                                :required="$fields[$sub_item['field']]['required']??false"
+                                :disabled="($fields[$sub_item['field']]['disabled']??false)"
+                                :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
+                            @endif
+                        @break
                     @endswitch
                 @endif
             @endforeach
