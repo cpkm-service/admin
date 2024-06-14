@@ -94,6 +94,7 @@ class AdminServiceProvider extends ServiceProvider
 
         
         Blade::componentNamespace('Cpkm\\Admin\\View\\Components\\Backend', 'backend');
+        
     }
 
     /**
