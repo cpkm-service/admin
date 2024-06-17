@@ -47,6 +47,10 @@ class Input extends Component
         $this->min = $min;
         $this->readonly = $readonly;
         $this->float = $float;
+        if(is_float((float)$this->value)) {
+            $temp = explode('.',(float)$this->value);
+            $this->float = count($temp) > 1 ? strlen($temp[1]) : 0;
+        }
     }
 
     /**

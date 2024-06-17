@@ -5,7 +5,7 @@
     <input 
         type="text" 
         class="form-control text-end input-number" 
-        value="{{number_format(($value)?$value:0)}}"
+        value="{{number_format(($value)?$value:0, $float??0)}}"
         placeholder="{{__($placeholder)}}" 
         id="number-{{$name}}" 
         data-name="{{$name}}"
