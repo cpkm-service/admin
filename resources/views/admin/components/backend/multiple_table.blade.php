@@ -153,6 +153,11 @@
                             </span>
                         </div>
                     @break
+                    @case('slot')
+                        <div class="text-center">
+                            {!!($fields[$item['field']]['value']??'')!!}
+                        </div>
+                    @break
                 @endswitch
             </td>
             @endforeach

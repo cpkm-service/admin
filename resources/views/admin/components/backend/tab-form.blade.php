@@ -21,7 +21,9 @@
         @csrf
         @foreach ($form['tabs'] as $key => $tab)
         <div class="tab-pane @if($key == 0) active @endif" id="{{$tab['key']}}" role="tabpanel" aria-labelledby="btabs-alt-static-home-tab">
-            <x-backend::row :row="$tab['tab']" />
+            @foreach($tab['tab'] as $row)
+            <x-backend::row :row="$row" />
+            @endforeach
             <div class="row">
                 <div class="mb-4">
                     @if(!($show??false))
@@ -37,9 +39,6 @@
         @error('error')
             <div id="error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>
         @enderror
-        <div id="template_area" class="d-none">
-        @stack('template')    
-        </div>
         @if($show??false)
         <div class="tab-pane " id="btabs-static-profile" role="tabpanel" aria-labelledby="btabs-alt-static-home-tab">
             @include('backend.layouts.audits', [ 'table' => $table, 'table_id' => $detail->id ])
@@ -47,6 +46,9 @@
         @endif
     </div>
 </form>
+<div id="template_area" class="d-none">
+@stack('template')    
+</div>
 @push('javascript')
 <script>
     Codebase.onLoad((

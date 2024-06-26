@@ -40,7 +40,7 @@
         <div id="{{$name}}-error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>
     @enderror
 </div>
-@push('javascript')
+@prepend('javascript')
 <script>
     @if($children)
         $(`select[name="{{$name}}"]`).change(function(){
@@ -97,4 +97,4 @@
     });
     @endif
 </script>
-@endpush
+@endprepend
