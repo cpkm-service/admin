@@ -14,6 +14,7 @@
         </button>
     </li>
     @endif
+    @yield('tab')
 </ul>
 <form action="{{$form['action']}}" method="POST" name="{{$form['name']}}" enctype="multipart/form-data">
     <div class="block-content tab-content">
@@ -44,6 +45,7 @@
             @include('backend.layouts.audits', [ 'table' => $table, 'table_id' => $detail->id ])
         </div>
         @endif
+        @yield('tab-content')
     </div>
 </form>
 <div id="template_area" class="d-none">
