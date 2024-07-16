@@ -22,19 +22,17 @@
         <option></option>
         @endif
         @foreach($options as $option)
-        <option value="{{$option['value']}}" 
-            @if($multiple)
-                @if(in_array($option['value'],$value)) selected @endif
-            @else
-                @if($value == $option['value']) selected @endif
-            @endif
+    <option value="{{$option['value']}}"
+            @if($multiple && is_array($value) && in_array($option['value'], $value)) selected @endif
+            @if(!$multiple && $value == $option['value']) selected @endif
+            
             @if(isset($option['extends']))
-            @foreach($option['extends'] as $key => $extend)
-            {{$key}}="{{$extend}}"
-            @endforeach
+                @foreach($option['extends'] as $key => $extend)
+                    {{$key}}="{{$extend}}"
+                @endforeach
             @endif
-        >{{$option['name']}}</option>
-        @endforeach
+    >{{$option['name']}}</option>
+    @endforeach
     </select>
     @error($name)
         <div id="{{$name}}-error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>
