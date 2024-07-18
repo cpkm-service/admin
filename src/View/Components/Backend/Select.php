@@ -6,6 +6,7 @@ use Illuminate\View\Component;
 
 class Select extends Component
 {
+    public $selecteds;
     public $text;
     public $placeholder;
     public $name;
@@ -26,8 +27,9 @@ class Select extends Component
      *
      * @return void
      */
-    public function __construct($text,$placeholder,$name,$options = [],$children = [],$multiple=false,$value = '',$required = false,$disabled = false, $ajax = '', $readonly = false, $source = [], $templateResult = '', $templateSelection = '', public $class='')
+    public function __construct($selected = [],$text,$placeholder,$name,$options = [],$children = [],$multiple=false,$value = '',$required = false,$disabled = false, $ajax = '', $readonly = false, $source = [], $templateResult = '', $templateSelection = '', public $class='')
     {
+        $this->selected = $selected;
         $this->name = $name;
         $this->value= $value;
         $this->required = $required;
@@ -46,6 +48,11 @@ class Select extends Component
             $service = app($source['class']);
             $this->options = $service->select($params);
         }
+
+        foreach ($this->options as &$option) {
+            $option['selected'] = in_array($option['value'], $this->selected);
+        }
+
         $this->templateResult = $templateResult;
         $this->templateSelection = $templateSelection;
     }

@@ -22,9 +22,11 @@
                             :value="($fields[$sub_item['field']]['value']??'')" />
                         @break
                         @case('select')
+
                         <x-backend::select 
                             :children="($fields[$sub_item['field']]['children']??[])" 
                             :options="$fields[$sub_item['field']]['options']" 
+                            :selected="($fields[$sub_item['field']]['selected']??[])"
                             :text="$fields[$sub_item['field']]['text']" 
                             :name="$fields[$sub_item['field']]['name']" 
                             :placeholder="$fields[$sub_item['field']]['placeholder']"

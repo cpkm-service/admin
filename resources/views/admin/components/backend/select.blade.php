@@ -1,5 +1,7 @@
 
 <div class="mb-4 {{$class??''}}">
+
+
     @if($text)
     <label class="form-label" for="{{$name}}">{{__($text)}}@if($required)<span class="text-danger">*</span>@endif</label>
     @endif
@@ -19,20 +21,10 @@
         lang="zh-CN"
     >
         @if(!$multiple)
-        <option></option>
         @endif
         @foreach($options as $option)
-    <option value="{{$option['value']}}"
-            @if($multiple && is_array($value) && in_array($option['value'], $value)) selected @endif
-            @if(!$multiple && $value == $option['value']) selected @endif
-            
-            @if(isset($option['extends']))
-                @foreach($option['extends'] as $key => $extend)
-                    {{$key}}="{{$extend}}"
-                @endforeach
-            @endif
-    >{{$option['name']}}</option>
-    @endforeach
+            <option value="{{$option['value']}}" @if($option['selected']) selected @endif>{{$option['name']}}</option>
+        @endforeach
     </select>
     @error($name)
         <div id="{{$name}}-error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>
