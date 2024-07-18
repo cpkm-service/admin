@@ -9,7 +9,7 @@
                 <tr>
                     <th class="text-center">#</th>
                     @foreach($parameters as $item)
-                    <th class="text-center" @if($item['width']??false) style="min-width: {{$item['width']}};" @endif>
+                    <th class="text-center @if(($item['width']??false) == '0px') d-none @endif" @if($item['width']??false) style="min-width: {{$item['width']}};" @endif>
                         {{__($fields[$item['field']]['text'])}}
                         @if($fields[$item['field']]['required'])
                         <span class="text-danger">*</span>
@@ -88,7 +88,7 @@
                 </div>
             </td>
             @foreach($parameters as $item)
-            <td>
+            <td class="@if(($item['width']??false) == '0px') d-none @endif">
                 @switch($fields[$item['field']]['tag'])
                     @case('select')
                     <x-backend::select 
@@ -151,6 +151,11 @@
                             <span id="{{$fields[$item['field']]['name']}}" >
                                 {{($fields[$item['field']]['value']??'')}}
                             </span>
+                        </div>
+                    @break
+                    @case('slot')
+                        <div class="text-center">
+                            {!!($fields[$item['field']]['value']??'')!!}
                         </div>
                     @break
                 @endswitch
@@ -230,6 +235,12 @@
                 let element = $(`[id="{{$name}}[${id}][${key}]"]`);
                 if(element.length > 0 ) {
                     switch (element.prop("tagName")) {
+                        case 'A':
+                            element.attr('href', item[key])
+                            break;
+                        case 'SPAN':
+                            element.text(item[key])
+                            break;
                         case 'TEXTAREA':
                             element.text(item[key])
                             break;

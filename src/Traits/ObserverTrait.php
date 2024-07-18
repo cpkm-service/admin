@@ -31,8 +31,8 @@ trait ObserverTrait
                     $new_values[$value] = $model->{$value};
 
                     $name = isset(static::$audit['table']) ? 
-                        __('backend.'.(new static::$audit['table'])->getTable().'.'.$model->getTable().'.*.'.$value) :
-                        __('backend.'.$model->getTable().'.'.$value);
+                        __((static::$prefix??'').'backend.'.(new static::$audit['table'])->getTable().'.'.$model->getTable().'.*.'.$value) :
+                        __((static::$prefix??'').'backend.'.$model->getTable().'.'.$value);
 
                     $auditing[] = __('backend.audits.created', [
                         'name' => $name,
@@ -57,8 +57,8 @@ trait ObserverTrait
                     $new_values[$value] = $model->{$value};
 
                     $name = isset(static::$audit['table']) ? 
-                        __('backend.'.(new static::$audit['table'])->getTable().'.'.$model->getTable().'.*.'.$value) :
-                        __('backend.'.$model->getTable().'.'.$value);
+                        __((static::$prefix??'').'backend.'.(new static::$audit['table'])->getTable().'.'.$model->getTable().'.*.'.$value) :
+                        __((static::$prefix??'').'backend.'.$model->getTable().'.'.$value);
 
                     $auditing[] = __('backend.audits.updated', [
                         'name' => $name,
@@ -82,8 +82,8 @@ trait ObserverTrait
                     $old_values[$value] = $model->{$value};
 
                     $name = isset(static::$audit['table']) ? 
-                        __('backend.'.(new static::$audit['table'])->getTable().'.'.$model->getTable().'.*.'.$value) :
-                        __('backend.'.$model->getTable().'.'.$value);
+                        __((static::$prefix??'').'backend.'.(new static::$audit['table'])->getTable().'.'.$model->getTable().'.*.'.$value) :
+                        __((static::$prefix??'').'backend.'.$model->getTable().'.'.$value);
 
                     $auditing[] = __('backend.audits.deleted', [
                         'name' => $name,
@@ -110,8 +110,8 @@ trait ObserverTrait
                 }   
 
                 $name = isset(static::$audit['table']) ? 
-                    __('backend.'.(new static::$audit['table'])->getTable().'.'.$model->getTable().'.*.'.$key) :
-                    __('backend.'.$model->getTable().'.'.$key);
+                    __((static::$prefix??'').'backend.'.(new static::$audit['table'])->getTable().'.'.$model->getTable().'.*.'.$key) :
+                    __((static::$prefix??'').'backend.'.$model->getTable().'.'.$key);
 
                 $auditing[] = __('backend.audits.updated', [
                     'name' => $name,
@@ -132,7 +132,6 @@ trait ObserverTrait
                     $obj['replace'][] = $item;
                 });
                 $tmp = str_replace($obj['search'], $obj['replace'], static::$audit['translation'][$value]['format'], $count);
-                
                 if($count == 0) return '';
                 return $tmp;
             }

@@ -11,7 +11,7 @@
                     @switch($fields[$sub_item['field']]['tag'])
                         @case('radio')
                         <x-backend::radio
-                            :direction="$fields[$sub_item['field']]['tag']"
+                            :direction="($fields[$sub_item['field']]['direction']??false)"
                             :tag="$fields[$sub_item['field']]['tag']" 
                             :text="$fields[$sub_item['field']]['text']" 
                             :name="$fields[$sub_item['field']]['name']" 
