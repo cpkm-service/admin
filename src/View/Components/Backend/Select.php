@@ -6,7 +6,6 @@ use Illuminate\View\Component;
 
 class Select extends Component
 {
-    public $selecteds;
     public $text;
     public $placeholder;
     public $name;
@@ -22,16 +21,16 @@ class Select extends Component
     public $templateSelection;
 
     public $source;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($selected = [],$text,$placeholder,$name,$options = [],$children = [],$multiple=false,$value = '',$required = false,$disabled = false, $ajax = '', $readonly = false, $source = [], $templateResult = '', $templateSelection = '', public $class='')
+    public function __construct($text, $placeholder, $name, $options = [], $children = [], $multiple = false, $value = '', $required = false, $disabled = false, $ajax = '', $readonly = false, $source = '', $templateResult = '', $templateSelection = '', public $class = '')
     {
-        $this->selected = $selected;
         $this->name = $name;
-        $this->value= $value;
+        $this->value = $value;
         $this->required = $required;
         $this->text = $text;
         $this->placeholder = $placeholder;
@@ -41,18 +40,10 @@ class Select extends Component
         $this->children = $children;
         $this->ajax = $ajax;
         $this->readonly = $readonly;
-        if($source) {
-            $class = $source['class'];
-            $method = $source['method'];
-            $params = $source['params'] ?? '';
-            $service = app($source['class']);
-            $this->options = $service->select($params);
+        if ($source) {
+            $service = app($source);
+            $this->options = $service->select();
         }
-
-        foreach ($this->options as &$option) {
-            $option['selected'] = in_array($option['value'], $this->selected);
-        }
-
         $this->templateResult = $templateResult;
         $this->templateSelection = $templateSelection;
     }

@@ -1,7 +1,5 @@
 
 <div class="mb-4 {{$class??''}}">
-
-
     @if($text)
     <label class="form-label" for="{{$name}}">{{__($text)}}@if($required)<span class="text-danger">*</span>@endif</label>
     @endif
@@ -21,16 +19,28 @@
         lang="zh-CN"
     >
         @if(!$multiple)
+        <option></option>
         @endif
         @foreach($options as $option)
-            <option value="{{$option['value']}}" @if($option['selected']) selected @endif>{{$option['name']}}</option>
+        <option value="{{$option['value']}}" 
+            @if($multiple)
+                @if(in_array($option['value'],$value)) selected @endif
+            @else
+                @if($value == $option['value']) selected @endif
+            @endif
+            @if(isset($option['extends']))
+            @foreach($option['extends'] as $key => $extend)
+            {{$key}}="{{$extend}}"
+            @endforeach
+            @endif
+        >{{$option['name']}}</option>
         @endforeach
     </select>
     @error($name)
         <div id="{{$name}}-error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>
     @enderror
 </div>
-@prepend('javascript')
+@push('javascript')
 <script>
     @if($children)
         $(`select[name="{{$name}}"]`).change(function(){
@@ -87,4 +97,4 @@
     });
     @endif
 </script>
-@endprepend
+@endpush

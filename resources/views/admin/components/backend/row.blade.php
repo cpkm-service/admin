@@ -11,7 +11,7 @@
                     @switch($fields[$sub_item['field']]['tag'])
                         @case('radio')
                         <x-backend::radio
-                            :direction="($fields[$sub_item['field']]['direction']??false)"
+                            :direction="$fields[$sub_item['field']]['tag']"
                             :tag="$fields[$sub_item['field']]['tag']" 
                             :text="$fields[$sub_item['field']]['text']" 
                             :name="$fields[$sub_item['field']]['name']" 
@@ -22,11 +22,9 @@
                             :value="($fields[$sub_item['field']]['value']??'')" />
                         @break
                         @case('select')
-
                         <x-backend::select 
                             :children="($fields[$sub_item['field']]['children']??[])" 
                             :options="$fields[$sub_item['field']]['options']" 
-                            :selected="($fields[$sub_item['field']]['selected']??[])"
                             :text="$fields[$sub_item['field']]['text']" 
                             :name="$fields[$sub_item['field']]['name']" 
                             :placeholder="$fields[$sub_item['field']]['placeholder']"
@@ -119,17 +117,6 @@
                             :parameters="$fields[$sub_item['field']]['parameters']"
                             :id="$sub_item['field']"
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
-                        @break
-                        @case('ckeditor-print')
-                            @if(collect(app()->getLoadedProviders())->has(\Cpkm\Print\PrintServiceProvider::class))
-                            <x-print::ckeditor-print 
-                                :text="$fields[$sub_item['field']]['text']" 
-                                :name="$fields[$sub_item['field']]['name']" 
-                                :placeholder="$fields[$sub_item['field']]['placeholder']"
-                                :required="$fields[$sub_item['field']]['required']??false"
-                                :disabled="($fields[$sub_item['field']]['disabled']??false)"
-                                :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
-                            @endif
                         @break
                     @endswitch
                 @endif
